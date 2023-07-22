@@ -1,0 +1,39 @@
+
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+    <!-- bradcam_area  -->
+
+
+    <div class="job_details_area">
+
+        <div class="container">
+			<div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="apply_job_form white-bg">
+
+                       <div class="row">
+                          <main class="mt-5">
+    <div class="container mynav">
+
+
+{% block body %}
+  <p>Logged out!</p>
+  <a href="{% url 'login'%}">Click here to login again.</a>
+{% endblock body %}
+
+</div>
+</main>
+
+</div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {% endblock body %}
+

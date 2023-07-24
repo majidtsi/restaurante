@@ -63,14 +63,28 @@ def ordine(request,id):
 
 
     return render(request,'ordine.html',{"id":id,"piatti":piatti})
+def ordine_details(request,pd,id):
+    piatto=Piatti.objects.get(id=pd)
+    context={"piatto":piatto,"id":id,"pd":pd}
+    return render(request,'ordine_details.html',context=context)
+
 
 def piatti_ordinati(request):
     id_preno=request.POST['prenot_id']
     id_piat = request.POST['piat_id']
+
+    quant = request.POST['quantita']
+    if quant:
+        quantita=quant
+    else:
+        quantita=1
+    piatto=Piatti.objects.get(id=id_piat)
+    piatto.quantita=quantita
     ordini=Ordini()
     ordini.prenota=Prenotazione.objects.get(id=id_preno)
-    ordini.piatto = Piatti.objects.get(id=id_piat)
+    ordini.piatto = piatto
     ordini.save()
+
     return redirect(reverse('ordine', args=(id_preno,)))
 
 def tutti_prenotazione(request):
@@ -78,8 +92,10 @@ def tutti_prenotazione(request):
     return render(request,'tutti_pro.html',{"pro":prno})
 def details(request,id):
     prenot=Prenotazione.objects.get(id=id)
-    print(prenot)
-    print("----------")
-    ord=Ordini.objects.filter(prenota=prenot)
-    print(ord)
-    return render(request,'details.html',{'ord':ord})
+    ord=Ordini.objects.filter(prenota=id)
+    context={'ord': ord}
+    context["name"]=prenot.user.username
+    context["date"] = prenot.date
+    context["time"] = prenot.time
+    context["Npersone"] = prenot.number_of_persons
+    return render(request,'details.html',context=context)

@@ -16,8 +16,12 @@
     <div class="job_details_area">
 
         <div class="container">
+            <h1>Prenotazione: {{ name }}</h1>
+            <h3>Data: {{ date }}</h3>
+            <h3>Ora: {{time}}</h3>
+            <h3>Numero di persone: {{ Npersone }}</h3>
 
-
+             {% for o in ord %}
             <div class="row">
                 <div class="col-lg-10 mx-auto">
                     <div class="apply_job_form white-bg">
@@ -26,11 +30,10 @@
                            <div class="col-sm-3">
                                </div>
                            <div class="col-sm-6">
-                               <h1 class="text-center">Prenotazione :{{ord.prenota.user}}</h1>
-                               <p><i>Numero di persone :{{ord.prenota.number_of_persons}}</i></p>
-                               <p>Giorno: {{ord.prenota.date}}</p>
-                               <p style="color: red;">Ora :{{ord.prenota.time}}</p>
-                              <p style="color: red;">Ora :{{ord.piatto.name}}</p>
+                               <h4 class="">{{o.piatto.name}}</h4>
+                               <p><i>{{o.piatto.description}}</i></p>
+
+                              <p style="color: red;">Prezzo :{{o.piatto.price}}€</p>
 
                             </div>
 
@@ -42,6 +45,7 @@
                     </div>
                 </div>
             </div>
+            {% endfor %}
 
         </div>
     </div>

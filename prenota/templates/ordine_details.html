@@ -17,7 +17,7 @@
 
         <div class="container">
 
-            {% for piat in piatti %}
+
             <div class="row">
                 <div class="col-lg-10 mx-auto">
                     <div class="apply_job_form white-bg">
@@ -26,13 +26,21 @@
                            <div class="col-sm-3">
                                </div>
                            <div class="col-sm-6">
-                               <a href="{% url 'ordine_details' id piat.id %}">
-                               <h1 class="text-center">{{piat.name}}</h1>
-                               <p><i>{{piat.description}}</i></p>
-                               <p>{{piat.category}}</p>
-                               <p style="color: red;">{{piat.price}}</p>
+                               <h1 class="text-center">{{piatto.name}}</h1>
+                               <p><i>{{piatto.description}}</i></p>
+                               <p>{{piatto.category}}</p>
 
-                                </a>
+                               <p style="color: red;">{{piatto.price}}</p>
+                            <form method="post" action="{% url 'piatti_ordinati' %}">
+                            {% csrf_token %}
+                                <p>Quantita: <input type="number" name="quantita" id=""></p>
+                                <input type="hidden" value="{{piatto.id}}" name="piat_id">
+                                <input type="hidden" value="{{pd}}" name="prenot_id">
+
+                             <button type="submit" class="btn btn-primary">Ordina</button>
+
+                            </form>
+
                             </div>
 
                             <div class="col-sm-3">
@@ -43,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            {% endfor %}
+
         </div>
     </div>
 
